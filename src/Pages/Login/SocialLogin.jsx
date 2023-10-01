@@ -1,7 +1,7 @@
 import useAuth from "../../hooks/UseAuth";
 
 const SocialLogin = () => {
-    const {googleLogin} = useAuth()
+    const {googleLogin, githubLogin} = useAuth()
 
     const handleSocialLogin=(media)=>{
         media()
@@ -11,8 +11,9 @@ const SocialLogin = () => {
     return (
         <>
             <div className="divider">continue with</div>
-            <div className="">
+            <div className="flex justify-around">
                 <button onClick={()=>handleSocialLogin(googleLogin)} className="btn btn-primary btn-sm">Google</button>
+                <button onClick={()=>handleSocialLogin(githubLogin)} className="btn btn-primary btn-sm">Github</button>
             </div>
         </>
     );
