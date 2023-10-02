@@ -1,14 +1,10 @@
-import { Helmet } from 'react-helmet-async';
 import { AiTwotoneLock } from 'react-icons/ai';
 import { FaTruck } from 'react-icons/fa';
 import { TbRefresh } from 'react-icons/tb';
 
-const About = () => {
+const AboutCompo = () => {
     return (
         <>
-        <Helmet>
-            {<title>Glasses | About</title> }
-        </Helmet>
             <div className="px-8 py-12 text-center">
                 <h1 className="text-4xl font-bold">About us</h1>
                 <p className="my-6 font-thin">
@@ -44,4 +40,4 @@ const About = () => {
     );
 };
 
-export default About;
+export default AboutCompo;

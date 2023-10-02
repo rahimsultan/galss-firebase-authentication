@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/UseAuth';
@@ -28,6 +29,9 @@ const Register = () => {
     }
     return (
         <>
+        <Helmet>
+            <title>Glasses | Register Account</title>
+        </Helmet>
             <div className="hero min-h-screen bg-base-200">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="text-center lg:text-left">

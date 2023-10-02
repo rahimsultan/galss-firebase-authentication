@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useLoaderData } from "react-router-dom";
 
 const ProductDetail = () => {
@@ -5,6 +6,9 @@ const ProductDetail = () => {
 
     return (
         <>
+        <Helmet>
+            <title>Glasses | {sunglass.name}</title>
+        </Helmet>
             <img src="https://capricathemes.com/opencart/OPC09/OPC090220/image/cache/catalog/main-banner-1-1903x680.jpg" alt="" />
             <div className="grid grid-cols-1 md:grid-cols-2 md:h-[680px]">
 
