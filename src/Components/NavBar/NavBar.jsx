@@ -19,7 +19,9 @@ const Menus = () => {
 const NavBar = () => {
 
     // check if user available
-    const {user, logOut} = useAuth()
+    const {user, logOut, userImage, userName} = useAuth()
+
+    // console.log('from navbar',userName, userImage);
 
     // logout 
     const handleLogOut =()=>{
@@ -58,13 +60,18 @@ const NavBar = () => {
                         user ? <div className="dropdown dropdown-end">
                             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
-                                    <img src={user.photoURL} />
+                                    <img src={user.photoURL ? userImage : 'https://cdn-icons-png.flaticon.com/128/4322/4322991.png'} />
                                 </div>
                             </label>
                             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                                 <li>
-                                    <button className="btn btn-sm  btn-ghost">{user.displayName}</button>
+                                    <button className="btn btn-sm  btn-ghost">{user.displayName ? userName : 'Adam'}</button>
 
+                                </li>
+                                <li>
+                                    <Link to={'/edit-profile'} className="block w-full">
+                                    <button className="btn btn-sm  btn-ghost w-full">Edit Profile</button>
+                                    </Link>
                                 </li>
                                 <li>
                                     <button onClick={handleLogOut} className="btn btn-sm  btn-ghost">Logout</button>

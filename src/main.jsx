@@ -5,6 +5,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import EditProfile from "./Components/edit/EditProfile";
 import NotFound from "./Components/NotFound";
 import "./index.css";
 import About from "./Pages/About/About";
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
         path: 'register',
         element: <Register />
       },
+      {
+        path: '/edit-profile',
+        element: <PrivateRoute><EditProfile/></PrivateRoute>
+      }
     ]
   },
 ]);

@@ -1,4 +1,4 @@
-import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
 
@@ -8,6 +8,10 @@ const AuthProvider = ({children}) => {
 
     const [user, setUser] = useState({})
     const [loading, setLoading] = useState(true)
+    const [userName, setuserName] = useState(null)
+    const [userImage, setuserImage] = useState(null)
+
+    // console.log(userImage, userName, 'from auth');
 
     // google login 
     const googleProvider = new GoogleAuthProvider();
@@ -21,6 +25,13 @@ const AuthProvider = ({children}) => {
        return createUserWithEmailAndPassword(auth, email, password)
     }
 
+    // update profile
+    const updateUserProfile=(name, photo)=>{
+     return updateProfile(auth.currentUser, {
+        displayName: name, photoURL: photo
+      })
+    }
+
     // login account function 
     const logIn = (email, password)=>{
         setLoading(true)
@@ -31,6 +42,8 @@ const AuthProvider = ({children}) => {
     useEffect(()=>{
        const unSubscribe = onAuthStateChanged(auth,(user)=>{
             setUser(user)
+            setuserImage(user.photoURL)
+            setuserName(user.displayName)
             setLoading(false)
         })
         return ()=>{
@@ -55,7 +68,7 @@ const AuthProvider = ({children}) => {
 
 
     // context obj for sending data
-    const authentications = {googleLogin, createAccount, logIn, user, logOut, loading, githubLogin}
+    const authentications = {googleLogin, createAccount, logIn, user, logOut, loading, githubLogin, updateUserProfile, userImage, userName, setuserImage, setuserName}
 
   return (
     <authContext.Provider value={authentications}>

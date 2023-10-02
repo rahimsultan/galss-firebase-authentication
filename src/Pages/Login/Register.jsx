@@ -1,13 +1,15 @@
 import { Helmet } from 'react-helmet-async';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/UseAuth';
 import SocialLogin from './SocialLogin';
 
 const Register = () => {
 
     // call create user function
-    const {createAccount} = useAuth()
+    const {createAccount, updateUserProfile} = useAuth()
+    const navigate = useNavigate()
+    // console.log(setuserImage, setuserName, 'from register');
 
     const handleSubmit =(e)=>{
         e.preventDefault()
@@ -21,9 +23,13 @@ const Register = () => {
         }
 
         createAccount(email, password)
-        .then(res=> {
-            console.log(res.user)
-            toast.success('Registration successfull')
+        .then((res)=> {
+            console.log(res.user, 'user created')
+            updateUserProfile(name, image)
+            .then(()=>{
+                toast.success('Registration successfull')
+                navigate('/')
+            })
         })
         .catch(error => console.log(error.message))
     }
